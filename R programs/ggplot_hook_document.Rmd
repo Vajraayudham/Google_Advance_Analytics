@@ -1,0 +1,84 @@
+---
+title: "ggplot_hook"
+author: "zerocool"
+date: "04/10/2023"
+output: html_document
+---
+
+## Setting Up My Environment
+Notes: setting up my environment by loading **tidyverse** and **palmerpenguins**
+packages
+
+```{r loading packages, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+data("penguins")
+```
+
+```{r}
+print(head(penguins))
+```
+
+
+## Creating ggplot for **flipper_length_mm** and **body_mass_g** column by species
+Notes: Here  plotting creating scatterplot for relationship
+between flipper_legth_mm and body_mass_g  by breakdown by species
+
+```{r ggplot for penguin dataViz, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+ggplot(data=penguins,aes(x=flipper_length_mm,y=body_mass_g))+
+  geom_point(color="purple")
+```
+
+
+## Creating plot with point in shape based on species 
+Note: here creating plot shape for each species different by
+using shape aesthetics 
+
+```{r ggplot shapebased on species, message=FALSE, warning=FALSE}
+ggplot(data=penguins,aes(x=flipper_length_mm,y=body_mass_g))+
+  geom_point(aes(shape=species))
+```
+
+## Flipper and body mass by species and sex
+Here we plot flipper against body mass and look breakdown by species and sex 
+
+```{r breakdown by species and sex, message=FALSE, warning=FALSE}
+ggplot(data=penguins,aes(x=flipper_length_mm,y=body_mass_g))+
+  geom_point(aes(color=species,
+                 shape=species)) +
+  facet_wrap(~sex)
+```
+
+
+## Flipper and body mass by species and sex dropping na values
+Here we plot flipper against body mass and look breakdown
+by species and sex and dropping na values
+
+```{r message=FALSE, warning=FALSE}
+penguins %>%
+  drop_na(sex) %>%
+  ggplot(data=penguins,mapping=aes(x=flipper_length_mm,y=body_mass_g))+
+  geom_point(mapping=aes(color=species,
+                 shape=species)) +
+  facet_wrap(~sex)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
